@@ -82,7 +82,7 @@ botonBorrarArchivoCarpeta = document.getElementById("boton-borrar-archivo-carpet
 botonEditarArchivo = document.getElementById("boton-editar-archivo");
 zonaDatosTexto = document.getElementById("zona-datos-texto");
 //botonGuardarArchivo = document.getElementById("boton-guardar-archivo");
-claseTextoArea = document.querySelectorAll(".texto-area");
+claseTextoArea = document.getElementsByClassName("texto-area");
 
 
 
@@ -616,7 +616,7 @@ function editarArchivo() {
     zonaDatos.style.display = "none";
     zonaDatosTexto.style.display = "inline-block";
 //    botonGuardarArchivo.style.display = "inline-block";
-    claseTextoArea.style.display = "inline-block";
+    claseTextoArea[0].style.display = "inline-block";
     botonEliminarDirectorio.style.display = "none";
 }
 
