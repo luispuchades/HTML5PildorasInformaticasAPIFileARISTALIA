@@ -55,6 +55,11 @@ var botonEditarArchivo;
 //Edición de archivo
 // Declaro variable para la zona de introducción de texto
 var zonaDatosTexto;
+// Declaro variable para el botón de guardar del área de texto
+// var botonGuardarArchivo
+
+// Declaro variable para la clase de los botones área de texto
+var claseTextoArea;
 
 
 
@@ -76,6 +81,11 @@ botonAtras = document.getElementById("boton-atras");
 botonBorrarArchivoCarpeta = document.getElementById("boton-borrar-archivo-carpeta");
 botonEditarArchivo = document.getElementById("boton-editar-archivo");
 zonaDatosTexto = document.getElementById("zona-datos-texto");
+//botonGuardarArchivo = document.getElementById("boton-guardar-archivo");
+claseTextoArea = document.querySelectorAll(".texto-area");
+
+
+
 
 //2. Definición de Funciones
 
@@ -603,8 +613,11 @@ function eliminarDirectorio() {
 function editarArchivo() {
     "use strict";
 
-    zonaDatos.style.display="none";
-    zonaDatosTexto.style.display="inline-block";
+    zonaDatos.style.display = "none";
+    zonaDatosTexto.style.display = "inline-block";
+//    botonGuardarArchivo.style.display = "inline-block";
+    claseTextoArea.style.display = "inline-block";
+    botonEliminarDirectorio.style.display = "none";
 }
 
 
