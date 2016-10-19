@@ -639,6 +639,8 @@ function editarArchivo() {
         claseTextoArea[i].style.display = "inline-block";
     }
 
+// Separar el cambio de zonaFichero del cambio de zonaDatos en
+// botones distintos
     zonaDatos.style.display = "none";
     zonaDatosTexto.style.display = "inline-block";
 
