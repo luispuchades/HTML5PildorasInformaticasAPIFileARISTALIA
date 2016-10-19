@@ -56,10 +56,19 @@ var botonEditarArchivo;
 // Declaro variable para la zona de introducción de texto
 var zonaDatosTexto;
 // Declaro variable para el botón de guardar del área de texto
-// var botonGuardarArchivo
-
+var botonGuardarArchivo;
 // Declaro variable para la clase de los botones área de texto
 var claseTextoArea;
+// Variable para identificar los botones que deben estar
+// visibles en la página de inicio con la clase mostrar-inicio
+var claseMostrarInicio;
+// Variabla para identificar los botones que deben estar ocultos
+// cuando active el botón de crear archivo
+var claseTextoAreaNo;
+// Declaro variable para botón que vuelve a visualizar todos los
+// botones del inicio en la zona de botones
+var botonAtrasTextoArea;
+
 
 
 
@@ -81,10 +90,11 @@ botonAtras = document.getElementById("boton-atras");
 botonBorrarArchivoCarpeta = document.getElementById("boton-borrar-archivo-carpeta");
 botonEditarArchivo = document.getElementById("boton-editar-archivo");
 zonaDatosTexto = document.getElementById("zona-datos-texto");
-//botonGuardarArchivo = document.getElementById("boton-guardar-archivo");
+botonGuardarArchivo = document.getElementById("boton-guardar-archivo");
 claseTextoArea = document.getElementsByClassName("texto-area");
-
-
+claseMostrarInicio = document.getElementsByClassName("mostrar-inicio");
+claseTextoAreaNo = document.getElementsByClassName("texto-area-no");
+botonAtrasTextoArea = document.getElementById("boton-atras-texto-area");
 
 
 //2. Definición de Funciones
@@ -613,11 +623,43 @@ function eliminarDirectorio() {
 function editarArchivo() {
     "use strict";
 
+// uso la variable n para los no
+    var n;
+// uso la variable i para los yes
+    var i;
+
+// Ocultamos todos los botones que no tienen que aparecer cuando
+// creamos o editamos un archivo
+
+    for (n = 0; n < claseTextoAreaNo.length; n = n + 1) {
+        claseTextoAreaNo[n].style.display = "none";
+    }
+
+    for (i = 0; i < claseTextoArea.length; i = i + 1) {
+        claseTextoArea[i].style.display = "inline-block";
+    }
+
     zonaDatos.style.display = "none";
     zonaDatosTexto.style.display = "inline-block";
-//    botonGuardarArchivo.style.display = "inline-block";
-    claseTextoArea[0].style.display = "inline-block";
-    botonEliminarDirectorio.style.display = "none";
+
+}
+
+function mostrarInicioZonaFichero() {
+    "use strict";
+
+    var n;
+    var i;
+
+    for (n = 0; n < claseTextoArea.length; n = n + 1) {
+        claseTextoArea[n].style.display = "none";
+    }
+
+    for (i = 0; i < claseMostrarInicio.length; i = i + 1) {
+        claseMostrarInicio[i].style.display = "inline-block";
+    }
+
+    zonaDatos.style.display = "inline-block";
+    zonaDatosTexto.style.display = "none";
 }
 
 
@@ -669,6 +711,7 @@ function comenzar() {
     botonBorrarArchivoCarpeta.addEventListener("click", borrarArchivoCarpeta, false);
     botonEliminarDirectorio.addEventListener("click", eliminarDirectorio, false);
     botonEditarArchivo.addEventListener("click", editarArchivo, false);
+    botonAtrasTextoArea.addEventListener("click", mostrarInicioZonaFichero, false);
     //TODO: Listar archivos actuales al inicio
 
 }

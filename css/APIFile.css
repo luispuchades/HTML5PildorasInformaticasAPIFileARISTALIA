@@ -218,14 +218,26 @@ header {
     font-weight: bold;
 }
 
+
+/* CLASES */
+
+.texto-area {
+    display: none;
+}
+
+.mostrar-inicio {
+    display: inline-block;
+}
+
 .texto-archivo {
     color: #00FF00;
     font-weight: normal;
     cursor: pointer;
 }
 
-.texto-area {
-    display: none;
+
+.texto-area-no {
+    display: inline-block;
 }
 
 .texto-directorio {
