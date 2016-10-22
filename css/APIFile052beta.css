@@ -64,9 +64,31 @@ header {
 * ajustarnos a las rigidezes de diseño de este botón. En su 
 * lugar, asignaremos esta función desde JS a otro botón
 */
-#boton-examinar, #boton-imagen {
-    display: none
+
+/* TODO: El centrado no es exacto, hay que corregirlo*/
+#area-texto {
+    background: #eeeeee;
+    border: 1px solid grey;
+    display: inline-block;
+    margin: auto;
+    min-height: 300px;
+    min-width: 200px;
+    height: 85%;
+    width: 85%;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: top;
 }
+
+#boton-examinar, #boton-imagen {
+    display: none;
+}
+
+/*
+#boton-guardar-archivo {
+    display: none;
+}
+*/
 
 
 #header-link {
@@ -115,6 +137,7 @@ header {
     text-decoration: none;
 }
 
+
 #titulo-ejercicio {
     border-top: 5px solid #0a0278;
     border-bottom: 5px solid #0a0278;
@@ -141,7 +164,7 @@ header {
     text-align: center;
 }
 
-#zona-datos {
+#zona-datos, #zona-datos-texto {
 /*    background: magenta;*/
     display: inline-block;
     margin-left: auto;
@@ -162,7 +185,7 @@ header {
     text-align: center;
 }
 
-#zona-fichero, #zona-datos {
+#zona-fichero, #zona-datos, #zona-datos-texto {
     border: 5px solid #0a0278;
     border-radius: 1em;
     display: inline-block;
@@ -176,7 +199,11 @@ header {
     padding: 20px;
 }
 
-#zona-fichero {
+#zona-datos-texto {
+    display: none;
+}
+
+#zona-fichero, {
 /*    background: red;*/
     min-width: 240px;
     width: 25%;
@@ -184,16 +211,33 @@ header {
     vertical-align: top;
 }
 
+
 #zona-nombre, #zona-destino {
     font-family: sans-serif;
     font-size: 1em;
     font-weight: bold;
 }
 
+
+/* CLASES */
+
+.texto-area {
+    display: none;
+}
+
+.mostrar-inicio {
+    display: inline-block;
+}
+
 .texto-archivo {
     color: #00FF00;
     font-weight: normal;
     cursor: pointer;
+}
+
+
+.texto-area-no {
+    display: inline-block;
 }
 
 .texto-directorio {
@@ -244,7 +288,7 @@ header {
     #zona-contenedor {
         width: 240px;
     }
-    #zona-datos {
+    #zona-datos, #zona-datos-texto {
         width: 66%
     }
 }
@@ -259,7 +303,7 @@ header {
 /*        background: red;*/
         width: 100%;
     }
-    #zona-datos {
+    #zona-datos, #zona-datos-texto {
         width: 58%;
     }
     #zona-fichero {
@@ -277,7 +321,7 @@ header {
 /*        background: yellow;*/
         width: 90%;
     }
-    #zona-datos {
+    #zona-datos, #zona-datos-texto {
         width: 65%;
     }
     #zona-fichero {
@@ -297,7 +341,7 @@ header {
         max-width: 840px;
         width: 85%;
     }
-    #zona-datos {
+    #zona-datos, #zona-datos-texto {
         width: 70%;
     }
     #zona-fichero {
@@ -318,7 +362,7 @@ header {
         min-width: 70%;
         width: 70%;
     }
-    #zona-datos {
+    #zona-datos, #zona-datos-texto {
         max-width: 610%;
         width: 70%;
     }
@@ -337,7 +381,7 @@ header {
         max-width: 840px;
         width: 65%;
     }
-    #zona-datos {
+    #zona-datos, #zona-datos-texto {
         max-width: 660px;
         width: 67%;
     }

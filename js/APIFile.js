@@ -27,6 +27,7 @@ var botonAbrirImagen;
 // Declaro el constructor que utilizaré para crear el lector
 var FileReader;
 
+
 // Acceso a espacio en disco
 var espacio;
 // Crear archivo
@@ -55,8 +56,6 @@ var botonEditarArchivo;
 //Edición de archivo
 // Declaro variable para la zona de introducción de texto
 var zonaDatosTexto;
-// Declaro variable para el botón de guardar del área de texto
-var botonGuardarArchivo;
 // Declaro variable para la clase de los botones área de texto
 var claseTextoArea;
 // Variable para identificar los botones que deben estar
@@ -68,6 +67,15 @@ var claseTextoAreaNo;
 // Declaro variable para botón que vuelve a visualizar todos los
 // botones del inicio en la zona de botones
 var botonAtrasTextoArea;
+// Declaro la variable para el botón de escribir archivo que
+// a su vez, visualiza el textarea para escribir texto.
+var botonEscribirArchivo;
+//Declaro el area de texto donde introduciré texto
+var zonaAreaTexto;
+// Declaro la variable para el botón de guardar archivo. Guardará en formato blob el texto introducido en el textarea
+var botonGuardarArchivo;
+
+
 
 
 
@@ -90,11 +98,13 @@ botonAtras = document.getElementById("boton-atras");
 botonBorrarArchivoCarpeta = document.getElementById("boton-borrar-archivo-carpeta");
 botonEditarArchivo = document.getElementById("boton-editar-archivo");
 zonaDatosTexto = document.getElementById("zona-datos-texto");
-botonGuardarArchivo = document.getElementById("boton-guardar-archivo");
 claseTextoArea = document.getElementsByClassName("texto-area");
 claseMostrarInicio = document.getElementsByClassName("mostrar-inicio");
 claseTextoAreaNo = document.getElementsByClassName("texto-area-no");
 botonAtrasTextoArea = document.getElementById("boton-atras-texto-area");
+botonEscribirArchivo = document.getElementById("boton-escribir-archivo");
+botonGuardarArchivo = document.getElementById("boton-guardar-archivo");
+zonaAreaTexto = document.getElementById("zona-area-texto");
 
 
 //2. Definición de Funciones
@@ -366,43 +376,6 @@ function accesoEspacio() {
 }
 
 
-//function mostrarResultado() {
-//    "use strict";
-//
-//    zonaDatos.innerHTML = "Archivo/carpeta creado con éxito";
-//}
-//
-//
-//function mostrarContenidoEntrada(contenido) {
-//    "use strict";
-//
-//    var resultado;
-//
-//    resultado = contenido.target.result;
-//
-//// Reseteamos los campos de captura de texto y nombre del fichero
-//    document.getElementById("zona-entrada").value = "";
-//    zonaDatos.innerHTML += "<p>Contenido: " + resultado + "</p>";
-//    mostrarResultado();
-//}
-
-
-//function leerContenido(archivo) {
-//    "use strict";
-//
-//// Añadimos el nombre y contenido del parametro "archivo" a
-//// la zona de datos
-//    zonaDatos.innerHTML = "";
-//    zonaDatos.innerHTML = "Nombre: " + archivo.name + "<br />";
-//    zonaDatos.innerHTML += "Tamaño: " + archivo.size + "bytes <br />";
-//
-//// Creamos un objeto lector, con el constructor FileReader
-//    lector = new FileReader();
-//// En caso de que cargue completamente, llamamos a la función exito
-//    lector.onload = mostrarContenidoEntrada;
-//    lector.readAsText(archivo);
-//}
-
 
 function eliminarArchivo() {
     "use strict";
@@ -438,7 +411,7 @@ function mostrarArchivo(entrada) {
     "use strict";
 
 // Vaciamos la casilla de texto
-    document.getElementById("zona-entrada").value = "";
+//    document.getElementById("zona-entrada").value = "";
 
 // Mostramos en zona-datos el fichero creado
     zonaDatos.innerHTML = "Éxito en la creación de espacio y archivo" + "<br />";
@@ -472,7 +445,6 @@ function revisarTipoEntrada(entradas) {
 
         document.getElementById("zona-entrada").value = "";
         document.getElementById("zona-datos").value = "";
-        mostrarFicheros();
     } else {
         alert("Para poder eliminar un documento o carpeta, debes indicar el nombre de uno de los ya existentes en el campo correspondiente. En caso de que sea un documento, debes incorporar la extensión del mismo separado por un punto. Deben respetarse las mayúsculas.");
     }
@@ -487,7 +459,7 @@ function revisarSiEntrada() {
         if (archivos.length) {
             revisarTipoEntrada(archivos);
         } else {
-            alert("Para poder borrar un documento o carpeta, debes indicar su nombre en el campo correspondiente. En caso de que sea un documento, debes incorporar la extensión del mismo separado por un punto.");
+            alert("No exiten actualmente ni archivos ni carpetas que poder borrar.");
         }
     }, errores);
 }
@@ -529,8 +501,125 @@ function crearCarpeta() {
 
 
 
+function mostrarInicioZonaFichero() {
+    "use strict";
+
+    var n;
+    var i;
+
+    for (n = 0; n < claseTextoArea.length; n = n + 1) {
+        claseTextoArea[n].style.display = "none";
+    }
+
+    for (i = 0; i < claseMostrarInicio.length; i = i + 1) {
+        claseMostrarInicio[i].style.display = "inline-block";
+    }
+
+    zonaEntrada.value = "";
+    zonaDatos.style.display = "inline-block";
+    zonaDatosTexto.style.display = "none";
+    mostrarFicheros();
+}
+
+
+
+function mostrarAreaTextoZonaFichero() {
+    "use strict";
+
+// uso la variable n para los no
+    var n;
+// uso la variable i para los yes
+    var i;
+
+// Ocultamos todos los botones que no tienen que aparecer cuando
+// creamos o editamos un archivo
+
+    for (n = 0; n < claseTextoAreaNo.length; n = n + 1) {
+        claseTextoAreaNo[n].style.display = "none";
+    }
+
+    for (i = 0; i < claseTextoArea.length; i = i + 1) {
+        claseTextoArea[i].style.display = "inline-block";
+    }
+}
+
+
+
+function mostrarZonaDatos() {
+    "use strict";
+
+    zonaDatosTexto.style.display = "none";
+    zonaDatos.style.display = "inline-block";
+}
+
+
+
+function mostrarZonaDatosTexto() {
+    "use strict";
+
+    zonaDatos.style.display = "none";
+    zonaDatosTexto.style.display = "inline-block";
+}
+
+
+
+function escrituraCorrecta() {
+    "use strict";
+
+    mostrarZonaDatos();
+    zonaDatos.innerHTML = "Archivo guardado con éxito";
+    zonaAreaTexto.value = "";
+    zonaDatos.value = "";
+}
+
+
+
+function escribirContenido(fileWriter) {
+    "use strict";
+
+    var blob;
+    var zonaAreaTextoValor;
+
+
+    zonaAreaTextoValor = zonaAreaTexto.value;
+
+    fileWriter.onwriteend = escrituraCorrecta();
+
+    blob = new Blob([zonaAreaTextoValor], {type: "text/html"});
+
+    fileWriter.write(blob);
+}
+
+
+
+function guardarArchivo() {
+    "use strict";
+
+
+    var zonaEntradaValor;
+
+    zonaEntradaValor = zonaEntrada.value;
+
+    espacio.getFile(zonaEntradaValor, null, function (entrada) {
+        entrada.createWriter(escribirContenido, errores);
+    }, errores);
+}
+
+
+
+function escribirArchivo() {
+    "use strict";
+
+    mostrarZonaDatosTexto();
+    zonaAreaTexto.focus();
+}
+
+
+
 function crearArchivo() {
     "use strict";
+
+
 
     var zonaEntradaValor;
 // Definimos el valor de la casilla zona-entrada en una variable
@@ -540,6 +629,9 @@ function crearArchivo() {
 // siempre que no exista otro anterior o con el mismo nombre.
     if (zonaEntradaValor !== "") {
         zonaEntradaValor = ruta + zonaEntradaValor;
+
+// Dejamos solo visibles los botones de edición de textarea
+        mostrarAreaTextoZonaFichero();
 
         espacio.getFile(zonaEntradaValor, {create: true, exclusive: false}, mostrarArchivo, errores);
 
@@ -620,49 +712,8 @@ function eliminarDirectorio() {
 
 
 
-function editarArchivo() {
-    "use strict";
 
-// uso la variable n para los no
-    var n;
-// uso la variable i para los yes
-    var i;
 
-// Ocultamos todos los botones que no tienen que aparecer cuando
-// creamos o editamos un archivo
-
-    for (n = 0; n < claseTextoAreaNo.length; n = n + 1) {
-        claseTextoAreaNo[n].style.display = "none";
-    }
-
-    for (i = 0; i < claseTextoArea.length; i = i + 1) {
-        claseTextoArea[i].style.display = "inline-block";
-    }
-
-// Separar el cambio de zonaFichero del cambio de zonaDatos en
-// botones distintos
-    zonaDatos.style.display = "none";
-    zonaDatosTexto.style.display = "inline-block";
-
-}
-
-function mostrarInicioZonaFichero() {
-    "use strict";
-
-    var n;
-    var i;
-
-    for (n = 0; n < claseTextoArea.length; n = n + 1) {
-        claseTextoArea[n].style.display = "none";
-    }
-
-    for (i = 0; i < claseMostrarInicio.length; i = i + 1) {
-        claseMostrarInicio[i].style.display = "inline-block";
-    }
-
-    zonaDatos.style.display = "inline-block";
-    zonaDatosTexto.style.display = "none";
-}
 
 
 
@@ -700,20 +751,35 @@ function comenzar() {
 // queramos en diseño.
 
     botonLeer.addEventListener("click", examinarArchivo, false);
+
     botonAbrirImagen.addEventListener("click", examinarImagen, false);
 
 // En caso de escribir un nombre en zonaEntrada crearemos un
 // archivo con gerFile() dentro de una funcion crearArchivo
     botonCrearArchivo.addEventListener("click", crearArchivo, false);
+
     botonCrearCarpeta.addEventListener("click", crearCarpeta, false);
+
     botonListarArchivos.addEventListener("click", mostrarFicheros, false);
+
     botonEliminarArchivo.addEventListener("click", eliminarArchivo, false);
+
     botonMoverArchivo.addEventListener("click", moverArchivo, false);
+
     botonAtras.addEventListener("click", volverAtras, false);
+
     botonBorrarArchivoCarpeta.addEventListener("click", borrarArchivoCarpeta, false);
+
     botonEliminarDirectorio.addEventListener("click", eliminarDirectorio, false);
-    botonEditarArchivo.addEventListener("click", editarArchivo, false);
+
+    botonEditarArchivo.addEventListener("click", mostrarAreaTextoZonaFichero, false);
+
     botonAtrasTextoArea.addEventListener("click", mostrarInicioZonaFichero, false);
+
+    botonEscribirArchivo.addEventListener("click", escribirArchivo, false);
+
+    botonGuardarArchivo.addEventListener("click", guardarArchivo, false);
+
     //TODO: Listar archivos actuales al inicio
 
 }
