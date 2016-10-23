@@ -152,7 +152,8 @@ function mostrarLector(e) {
     zonaDatos.innerHTML += "<p>" + resultado + "</p>";
 // Si en lugar de usar innerHTML usamos textContent, no ejecuta código HTML
 //    zonaDatos.textContent = resultado;
-    rellenarEntrada();
+    zonaEntrada.value = nombre;
+//    rellenarEntrada();
 }
 
 
@@ -284,6 +285,19 @@ function cambiarDirectorio(nuevaRuta) {
 //    alert("Click");
 //}
 
+function editarLeerArchivos(archivo) {
+    "use strict";
+
+//  Cambiamos a visualización de botones para lectura/edición de archivo
+    mostrarZonaDatosTexto();
+    mostrarAreaTextoZonaFichero();
+
+//
+    zonaEntrada.value = archivo;
+
+}
+
+
 
 function listarArchivos(archivos) {
     "use strict";
@@ -292,17 +306,12 @@ function listarArchivos(archivos) {
 
     for (i = 0; i < archivos.length; i = i + 1) {
         if (archivos[i].isFile) {
-            zonaDatos.innerHTML += "<span class='texto-archivo'>" + archivos[i].name + "</span><br />";
+            zonaDatos.innerHTML += "<span class='texto-archivo' onclick='editarLeerArchivos(\"" + archivos[i].name + "\");'>" + archivos[i].name + "</span><br />";
+//            zonaEntrada.value = archivos[i].name;
         } else if (archivos[i].isDirectory) {
-            zonaDatos.innerHTML += "<span onclick='cambiarDirectorio(\"" + archivos[i].name + "\")' class='texto-directorio'>" + archivos[i].name + "</span><br />";
+            zonaDatos.innerHTML += "<span class='texto-directorio' onclick='cambiarDirectorio(\"" + archivos[i].name + "\")'>" + archivos[i].name + "</span><br />";
         }
     }
-
-// NO FUNCIONA EL PODER PINCHAR SOBRE CADA ELEMENTO DEL ARRAY
-//    for (n = 0; n < archivos.length; n = n + 1 ) {
-//    archivos[n].addEventListener("click", cuadroHola);
-//    }
-
 }
 
 

@@ -1,6 +1,22 @@
-www.aristalia.com
+http://www.aristalia.com/boton2/APIFile.html
 
 Ejercicio: "API File"
+Original de "Pildoras Informáticas"
+
+Objetivo: Desarrollar las distintas propiedades y métodos del API File y unir en un único ejercicio los ejercicios del curso "Píldoras Informáticas" de HTML5 desde los vídeos 54 al 62 sobre el API File.
+
+Comentarios TODO:
+Es necesario crear un directorio de funciones en el README.md.
+La estructura de las funciones debe seguir la lógica del algoritmo de la página.
+
+
+
+
+
+
+20161022
+V0.53beta: "Crear Archivos" EXTENDIDO
+En esta actualización el botón crear archivo modifica la botonera solo con aquellos botones que intervienen en la creación, edición o guardado de archivos.
 
 20161014
 V0.50beta: "Mover archivos" activo
