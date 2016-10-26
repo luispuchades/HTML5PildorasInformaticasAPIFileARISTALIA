@@ -285,6 +285,36 @@ function cambiarDirectorio(nuevaRuta) {
 //    alert("Click");
 //}
 
+
+
+function exitoCargaContenidoArchivo(entrada) {
+    "use strict";
+
+    var resultado;
+    resultado = entrada.target.result;
+    zonaAreaTexto.innerHTML += "Contenido: " + resultado + "<br />";
+}
+
+
+
+function leerContenidoArchivo(archivo) {
+    "use strict";
+
+    zonaAreaTexto.innerHTML = "Nombre: " + archivo.name + "<br />";
+    zonaAreaTexto.innerHTML += "Tamaño: " + archivo.size + "bytes <br />";
+
+// Leemos el contenido del archivo
+//    lector = new fileReader();;
+    lector.onload = exitoCargaContenidoArchivo;
+    lector.readAsText(archivo);
+    alert("Hola1");
+
+}
+
+
+
+
+
 function editarLeerArchivos(archivo) {
     "use strict";
 
@@ -292,9 +322,14 @@ function editarLeerArchivos(archivo) {
     mostrarZonaDatosTexto();
     mostrarAreaTextoZonaFichero();
 
-//
+//Incorporamos a la casilla zona-entrada el nombre del archivo
+//al que le hemos hecho "click"
     zonaEntrada.value = archivo;
 
+//Extraemos el valor del archivo "archivo"
+    espacio.getFile(archivo, null, function (contenido) {
+        contenido.file(leerContenidoArchivo, errores);
+    }, errores);
 }
 
 
