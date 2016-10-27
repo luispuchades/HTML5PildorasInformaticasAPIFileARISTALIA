@@ -10,8 +10,9 @@ Es necesario crear un directorio de funciones en el README.md.
 La estructura de las funciones debe seguir la lógica del algoritmo de la página.
 
 
-
-
+20161027
+V0.53beta: "Listar Archivos" EXTENDIDO
+Al hacer click sobre el nombre de un archivo, salta a la página de edición precargando el nombre del fichero, su tamaño en bytes y el contenido guardado.
 
 
 20161022

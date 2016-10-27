@@ -291,23 +291,27 @@ function exitoCargaContenidoArchivo(entrada) {
     "use strict";
 
     var resultado;
+
     resultado = entrada.target.result;
-    zonaAreaTexto.innerHTML += "Contenido: " + resultado + "<br />";
+
+    zonaAreaTexto.innerHTML = "";
+    zonaAreaTexto.innerHTML = resultado;
 }
 
 
 
 function leerContenidoArchivo(archivo) {
     "use strict";
+//    var lector;
 
-    zonaAreaTexto.innerHTML = "Nombre: " + archivo.name + "<br />";
-    zonaAreaTexto.innerHTML += "Tamaño: " + archivo.size + "bytes <br />";
+//    zonaAreaTexto.innerHTML = "";
+//    zonaAreaTexto.innerHTML = "Nombre: " + archivo.name + " ";
+//    zonaAreaTexto.innerHTML += "Tamaño: " + archivo.size + " " + "bytes" + " ";
 
 // Leemos el contenido del archivo
-//    lector = new fileReader();;
+    lector = new FileReader();
     lector.onload = exitoCargaContenidoArchivo;
     lector.readAsText(archivo);
-    alert("Hola1");
 
 }
 
@@ -319,6 +323,7 @@ function editarLeerArchivos(archivo) {
     "use strict";
 
 //  Cambiamos a visualización de botones para lectura/edición de archivo
+
     mostrarZonaDatosTexto();
     mostrarAreaTextoZonaFichero();
 
@@ -327,7 +332,7 @@ function editarLeerArchivos(archivo) {
     zonaEntrada.value = archivo;
 
 //Extraemos el valor del archivo "archivo"
-    espacio.getFile(archivo, null, function (contenido) {
+    espacio.getFile(archivo, {create: true, exclusive: false}, function (contenido) {
         contenido.file(leerContenidoArchivo, errores);
     }, errores);
 }
@@ -342,7 +347,6 @@ function listarArchivos(archivos) {
     for (i = 0; i < archivos.length; i = i + 1) {
         if (archivos[i].isFile) {
             zonaDatos.innerHTML += "<span class='texto-archivo' onclick='editarLeerArchivos(\"" + archivos[i].name + "\");'>" + archivos[i].name + "</span><br />";
-//            zonaEntrada.value = archivos[i].name;
         } else if (archivos[i].isDirectory) {
             zonaDatos.innerHTML += "<span class='texto-directorio' onclick='cambiarDirectorio(\"" + archivos[i].name + "\")'>" + archivos[i].name + "</span><br />";
         }
@@ -756,7 +760,11 @@ function eliminarDirectorio() {
 
 
 
+function funcionDesahabilitada() {
+    "use strict"
 
+    alert("Función deshabilitada temporalmente");
+}
 
 
 
@@ -816,7 +824,6 @@ function comenzar() {
 
     botonEliminarDirectorio.addEventListener("click", eliminarDirectorio, false);
 
-    botonEditarArchivo.addEventListener("click", mostrarAreaTextoZonaFichero, false);
 
     botonAtrasTextoArea.addEventListener("click", mostrarInicioZonaFichero, false);
 
@@ -824,6 +831,7 @@ function comenzar() {
 
     botonGuardarArchivo.addEventListener("click", guardarArchivo, false);
 
+    botonEditarArchivo.addEventListener("click", funcionDesahabilitada, false);
     //TODO: Listar archivos actuales al inicio
 
 }

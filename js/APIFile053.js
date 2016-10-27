@@ -152,7 +152,8 @@ function mostrarLector(e) {
     zonaDatos.innerHTML += "<p>" + resultado + "</p>";
 // Si en lugar de usar innerHTML usamos textContent, no ejecuta código HTML
 //    zonaDatos.textContent = resultado;
-    rellenarEntrada();
+    zonaEntrada.value = nombre;
+//    rellenarEntrada();
 }
 
 
@@ -285,6 +286,58 @@ function cambiarDirectorio(nuevaRuta) {
 //}
 
 
+
+function exitoCargaContenidoArchivo(entrada) {
+    "use strict";
+
+    var resultado;
+    resultado = entrada.target.result;
+    zonaAreaTexto.innerHTML += "Contenido: " + resultado + "<br />";
+}
+
+
+
+function leerContenidoArchivo(archivo) {
+    "use strict";
+//    var lector;
+
+    zonaAreaTexto.innerHTML = "";
+    zonaAreaTexto.innerHTML = "Nombre: " + archivo.name + " ";
+//    zonaAreaTexto.innerHTML += "<br/>";
+    zonaAreaTexto.innerHTML += "Tamaño: " + archivo.size + " " + "bytes" + " ";
+//    zonaAreaTexto.innerHTML += "<br/>";
+
+// Leemos el contenido del archivo
+    lector = new FileReader();
+    lector.onload = exitoCargaContenidoArchivo;
+    lector.readAsText(archivo);
+
+}
+
+
+
+
+
+function editarLeerArchivos(archivo) {
+    "use strict";
+
+//  Cambiamos a visualización de botones para lectura/edición de archivo
+
+    mostrarZonaDatosTexto();
+    mostrarAreaTextoZonaFichero();
+
+//Incorporamos a la casilla zona-entrada el nombre del archivo
+//al que le hemos hecho "click"
+    zonaEntrada.value = archivo;
+
+//Extraemos el valor del archivo "archivo"
+    espacio.getFile(archivo, {create: true, exclusive: false}, function (contenido) {
+        contenido.file(leerContenidoArchivo, errores);
+    }, errores);
+}
+
+
+
 function listarArchivos(archivos) {
     "use strict";
 
@@ -292,17 +345,11 @@ function listarArchivos(archivos) {
 
     for (i = 0; i < archivos.length; i = i + 1) {
         if (archivos[i].isFile) {
-            zonaDatos.innerHTML += "<span class='texto-archivo'>" + archivos[i].name + "</span><br />";
+            zonaDatos.innerHTML += "<span class='texto-archivo' onclick='editarLeerArchivos(\"" + archivos[i].name + "\");'>" + archivos[i].name + "</span><br />";
         } else if (archivos[i].isDirectory) {
-            zonaDatos.innerHTML += "<span onclick='cambiarDirectorio(\"" + archivos[i].name + "\")' class='texto-directorio'>" + archivos[i].name + "</span><br />";
+            zonaDatos.innerHTML += "<span class='texto-directorio' onclick='cambiarDirectorio(\"" + archivos[i].name + "\")'>" + archivos[i].name + "</span><br />";
         }
     }
-
-// NO FUNCIONA EL PODER PINCHAR SOBRE CADA ELEMENTO DEL ARRAY
-//    for (n = 0; n < archivos.length; n = n + 1 ) {
-//    archivos[n].addEventListener("click", cuadroHola);
-//    }
-
 }
 
 
