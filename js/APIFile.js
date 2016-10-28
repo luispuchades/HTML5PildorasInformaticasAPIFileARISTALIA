@@ -291,10 +291,7 @@ function exitoCargaContenidoArchivo(entrada) {
     "use strict";
 
     var resultado;
-
     resultado = entrada.target.result;
-
-    zonaAreaTexto.innerHTML = "";
     zonaAreaTexto.innerHTML = resultado;
 }
 
@@ -304,7 +301,7 @@ function leerContenidoArchivo(archivo) {
     "use strict";
 //    var lector;
 
-//    zonaAreaTexto.innerHTML = "";
+    zonaAreaTexto.innerHTML = "";
 //    zonaAreaTexto.innerHTML = "Nombre: " + archivo.name + " ";
 //    zonaAreaTexto.innerHTML += "Tamaño: " + archivo.size + " " + "bytes" + " ";
 
@@ -339,6 +336,14 @@ function editarLeerArchivos(archivo) {
 
 
 
+function pasarArchivo(archivo) {
+    "use strict";
+
+    zonaEntrada.value = archivo;
+}
+
+
+
 function listarArchivos(archivos) {
     "use strict";
 
@@ -346,9 +351,9 @@ function listarArchivos(archivos) {
 
     for (i = 0; i < archivos.length; i = i + 1) {
         if (archivos[i].isFile) {
-            zonaDatos.innerHTML += "<span class='texto-archivo' onclick='editarLeerArchivos(\"" + archivos[i].name + "\");'>" + archivos[i].name + "</span><br />";
+            zonaDatos.innerHTML += "<span class='texto-archivo' onclick='pasarArchivo(\"" + archivos[i].name +"\")' ondblclick='editarLeerArchivos(\"" + archivos[i].name + "\");'>" + archivos[i].name + "</span><br />";
         } else if (archivos[i].isDirectory) {
-            zonaDatos.innerHTML += "<span class='texto-directorio' onclick='cambiarDirectorio(\"" + archivos[i].name + "\")'>" + archivos[i].name + "</span><br />";
+            zonaDatos.innerHTML += "<span class='texto-directorio' onclick = 'pasarArchivo(\""+ archivos[i].name +"\")' ondblclick='cambiarDirectorio(\"" + archivos[i].name + "\")'>" + archivos[i].name + "</span><br />";
         }
     }
 }
@@ -761,7 +766,7 @@ function eliminarDirectorio() {
 
 
 function funcionDesahabilitada() {
-    "use strict"
+    "use strict";
 
     alert("Función deshabilitada temporalmente");
 }
@@ -824,7 +829,6 @@ function comenzar() {
 
     botonEliminarDirectorio.addEventListener("click", eliminarDirectorio, false);
 
-
     botonAtrasTextoArea.addEventListener("click", mostrarInicioZonaFichero, false);
 
     botonEscribirArchivo.addEventListener("click", escribirArchivo, false);
@@ -832,6 +836,7 @@ function comenzar() {
     botonGuardarArchivo.addEventListener("click", guardarArchivo, false);
 
     botonEditarArchivo.addEventListener("click", funcionDesahabilitada, false);
+
     //TODO: Listar archivos actuales al inicio
 
 }
