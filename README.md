@@ -6,9 +6,10 @@ Original de "Pildoras Informáticas"
 Objetivo: Desarrollar las distintas propiedades y métodos del API File y unir en un único ejercicio los ejercicios del curso "Píldoras Informáticas" de HTML5 desde los vídeos 54 al 62 sobre el API File.
 
 Comentarios TODO:
-Es necesario crear un directorio de funciones en el README.md.
-La estructura de las funciones debe seguir la lógica del algoritmo de la página.
-Pendiente automatización de git en brackets
+Es necesario crear un directorio de funciones en el README.md.<br />
+La estructura de las funciones debe seguir la lógica del algoritmo de la página.<br >
+
+
 
 
 20161027
