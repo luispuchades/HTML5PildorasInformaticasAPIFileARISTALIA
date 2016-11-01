@@ -262,6 +262,7 @@ function examinarArchivo() {
 }
 
 
+
 function errores(error) {
     "use strict";
 
@@ -274,6 +275,7 @@ function errores(error) {
 function cambiarDirectorio(nuevaRuta) {
     "use strict";
 
+    zonaEntrada.value = nuevaRuta;
     ruta = ruta + nuevaRuta + "/";
 
     mostrarFicheros();
@@ -346,12 +348,11 @@ function pasarArchivo(archivo) {
 
 function listarArchivos(archivos) {
     "use strict";
-
     var i;
 
     for (i = 0; i < archivos.length; i = i + 1) {
         if (archivos[i].isFile) {
-            zonaDatos.innerHTML += "<span class='texto-archivo' onclick='pasarArchivo(\"" + archivos[i].name +"\")' ondblclick='editarLeerArchivos(\"" + archivos[i].name + "\");'>" + archivos[i].name + "</span><br />";
+            zonaDatos.innerHTML += "<span class='texto-archivo' onclick= 'pasarArchivo(\"" + archivos[i].name +"\")' ondblclick='editarLeerArchivos(\"" + archivos[i].name + "\");'>" + archivos[i].name + "</span><br />";
         } else if (archivos[i].isDirectory) {
             zonaDatos.innerHTML += "<span class='texto-directorio' onclick = 'pasarArchivo(\""+ archivos[i].name +"\")' ondblclick='cambiarDirectorio(\"" + archivos[i].name + "\")'>" + archivos[i].name + "</span><br />";
         }
@@ -641,6 +642,9 @@ function escribirContenido(fileWriter) {
     blob = new Blob([zonaAreaTextoValor], {type: "text/html"});
 
     fileWriter.write(blob);
+
+//Intentar borrar el contenido de zonaAreaTexto
+    zonaAreaTextoValor = "";
 }
 
 
