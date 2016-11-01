@@ -8,6 +8,7 @@ Objetivo: Desarrollar las distintas propiedades y métodos del API File y unir e
 Comentarios TODO:
 Es necesario crear un directorio de funciones en el README.md.
 La estructura de las funciones debe seguir la lógica del algoritmo de la página.
+Pendiente automatización de git en brackets
 
 
 20161027
