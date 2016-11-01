@@ -25,7 +25,7 @@ var botonLeer;
 var botonImagen;
 var botonAbrirImagen;
 // Declaro el constructor que utilizaré para crear el lector
-var FileReader;
+// var FileReader;
 
 
 // Acceso a espacio en disco
@@ -152,8 +152,8 @@ function mostrarLector(e) {
     zonaDatos.innerHTML += "<p>" + resultado + "</p>";
 // Si en lugar de usar innerHTML usamos textContent, no ejecuta código HTML
 //    zonaDatos.textContent = resultado;
-    zonaEntrada.value = nombre;
-//    rellenarEntrada();
+//    zonaEntrada.value = nombre;
+    rellenarEntrada();
 }
 
 
@@ -352,9 +352,9 @@ function listarArchivos(archivos) {
 
     for (i = 0; i < archivos.length; i = i + 1) {
         if (archivos[i].isFile) {
-            zonaDatos.innerHTML += "<span class='texto-archivo' onclick= 'pasarArchivo(\"" + archivos[i].name +"\")' ondblclick='editarLeerArchivos(\"" + archivos[i].name + "\");'>" + archivos[i].name + "</span><br />";
+            zonaDatos.innerHTML += "<span class='texto-archivo' onclick= 'pasarArchivo(\"" + archivos[i].name + "\")' ondblclick='editarLeerArchivos(\"" + archivos[i].name + "\");'>" + archivos[i].name + "</span><br />";
         } else if (archivos[i].isDirectory) {
-            zonaDatos.innerHTML += "<span class='texto-directorio' onclick = 'pasarArchivo(\""+ archivos[i].name +"\")' ondblclick='cambiarDirectorio(\"" + archivos[i].name + "\")'>" + archivos[i].name + "</span><br />";
+            zonaDatos.innerHTML += "<span class='texto-directorio' onclick = 'pasarArchivo(\"" + archivos[i].name + "\")' ondblclick='cambiarDirectorio(\"" + archivos[i].name + "\")'>" + archivos[i].name + "</span><br />";
         }
     }
 }
