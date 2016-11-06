@@ -51,7 +51,7 @@ var botonBorrarArchivoCarpeta;
 // Eliminar Directorio
 var botonEliminarDirectorio;
 // Editar Archivo
-var botonEditarArchivo;
+//var botonEditarArchivo;
 
 //Edición de archivo
 // Declaro variable para la zona de introducción de texto
@@ -98,7 +98,7 @@ botonEliminarDirectorio = document.getElementById("boton-eliminar-directorio");
 botonMoverArchivo = document.getElementById("boton-mover-archivo");
 botonAtras = document.getElementById("boton-atras");
 botonBorrarArchivoCarpeta = document.getElementById("boton-borrar-archivo-carpeta");
-botonEditarArchivo = document.getElementById("boton-editar-archivo");
+//botonEditarArchivo = document.getElementById("boton-editar-archivo");
 zonaDatosTexto = document.getElementById("zona-datos-texto");
 claseTextoArea = document.getElementsByClassName("texto-area");
 claseMostrarInicio = document.getElementsByClassName("mostrar-inicio");
@@ -302,12 +302,13 @@ function exitoCargaContenidoArchivo(entrada) {
 
 
 
-//FIXME: PENDIENTE RESCATAR ARCHIVO Y PUBLICAR CARACTERISTICAS
 function mostrarPropiedadesArchivo(archivo) {
     "use strict";
 
-    zonaDatos.innerHTML = "Nombre archivo: " + archivo.name + "<br />";
-    zonaDatos.innerHTML += "Tamaño: " + archivo.size + " " + "bytes" + "<br />";
+    zonaDatos.innerHTML = "Nombre archivo: " + archivo.name + "<br /><br />";
+    zonaDatos.innerHTML += "Tamaño: " + archivo.size + " " + "bytes" + "<br /><br />";
+    zonaDatos.innerHTML += "Tipo: " + archivo.type + " " + "<br /><br />";
+    zonaDatos.innerHTML += "Última actualización: " + archivo.lastModifiedDate + " " + "<br /><br />";
 }
 
 
@@ -332,7 +333,6 @@ function mostrarPropiedades() {
 
 function leerContenidoArchivo(archivo) {
     "use strict";
-//    var lector;
 
 // Leemos el contenido del archivo
     lector = new FileReader();
@@ -346,13 +346,13 @@ function editarLeerArchivos(archivo) {
     "use strict";
 
 //  Cambiamos a visualización de botones para lectura/edición de archivo
-
     mostrarZonaDatosTexto();
     mostrarAreaTextoZonaFichero();
 
 //Incorporamos a la casilla zona-entrada el nombre del archivo
 //al que le hemos hecho "click"
     zonaEntrada.value = archivo;
+
 
 //Extraemos el valor del archivo "archivo"
     espacio.getFile(archivo, {create: true, exclusive: false}, function (contenido) {
@@ -646,8 +646,6 @@ function escrituraCorrecta() {
 
     mostrarZonaDatos();
     zonaDatos.innerHTML = "Archivo guardado con éxito";
-    zonaAreaTexto.value = "";
-    zonaDatos.value = "";
 }
 
 
@@ -667,8 +665,17 @@ function escribirContenido(fileWriter) {
 
     fileWriter.write(blob);
 
-//Intentar borrar el contenido de zonaAreaTexto
-    zonaAreaTextoValor = "";
+//    TODO: ACTUALIZACIÓN DE CONTENIDO UNA VEZ SE GUARDA
+//    FUTURE: Solucionarlo
+/*
+ * TODO: ACTUALIZACIÓN DE CONTENIDO UNA VEZ SE GUARDA
+ * Como no consigo que se actualice el contenido al guardar y lo que
+ * obtengo es la zonaAreaTexto en blanco y hay que actualizar el navegador
+ * con F5, lo he parcheado forzando una actualización del navegador desde
+ * la función window.location.reload();
+ * FUTURE: Solucionarlo
+ */
+    window.location.reload();
 }
 
 
@@ -835,6 +842,7 @@ function comenzar() {
 // diseño. Con un input type button si se puede hacer lo que
 // queramos en diseño.
 
+
     botonLeer.addEventListener("click", examinarArchivo, false);
 
     botonAbrirImagen.addEventListener("click", examinarImagen, false);
@@ -863,11 +871,9 @@ function comenzar() {
 
     botonGuardarArchivo.addEventListener("click", guardarArchivo, false);
 
-    botonEditarArchivo.addEventListener("click", funcionDesahabilitada, false);
+//    botonEditarArchivo.addEventListener("click", funcionDesahabilitada, false);
 
     botonPropiedadesArchivo.addEventListener("click", mostrarPropiedades, false);
-
-    //TODO: Listar archivos actuales al inicio
 
 }
 
