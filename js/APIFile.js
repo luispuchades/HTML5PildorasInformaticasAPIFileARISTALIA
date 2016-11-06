@@ -74,6 +74,8 @@ var botonEscribirArchivo;
 var zonaAreaTexto;
 // Declaro la variable para el botón de guardar archivo. Guardará en formato blob el texto introducido en el textarea
 var botonGuardarArchivo;
+// Declaro la variable para el botón de mostrar propiedades
+var botonPropiedadesArchivo;
 
 
 
@@ -105,6 +107,7 @@ botonAtrasTextoArea = document.getElementById("boton-atras-texto-area");
 botonEscribirArchivo = document.getElementById("boton-escribir-archivo");
 botonGuardarArchivo = document.getElementById("boton-guardar-archivo");
 zonaAreaTexto = document.getElementById("zona-area-texto");
+botonPropiedadesArchivo = document.getElementById("boton-propiedades-archivo");
 
 
 //2. Definición de Funciones
@@ -299,22 +302,43 @@ function exitoCargaContenidoArchivo(entrada) {
 
 
 
+//FIXME: PENDIENTE RESCATAR ARCHIVO Y PUBLICAR CARACTERISTICAS
+function mostrarPropiedadesArchivo(archivo) {
+    "use strict";
+
+    zonaDatos.innerHTML = "Nombre archivo: " + archivo.name + "<br />";
+    zonaDatos.innerHTML += "Tamaño: " + archivo.size + " " + "bytes" + "<br />";
+}
+
+
+
+function mostrarPropiedades() {
+// Pendiente de pasar como parámetro el nombre del fichero
+    "use strict";
+
+
+    var zonaEntradaValor;
+    zonaEntradaValor = zonaEntrada.value;
+
+    espacio.getFile(zonaEntradaValor, null, function (contenido) {
+        contenido.file(mostrarPropiedadesArchivo, errores);
+    }, errores);
+
+    mostrarZonaDatos();
+    zonaDatos.innerHTML = "";
+}
+
+
+
 function leerContenidoArchivo(archivo) {
     "use strict";
 //    var lector;
-
-    zonaAreaTexto.innerHTML = "";
-//    zonaAreaTexto.innerHTML = "Nombre: " + archivo.name + " ";
-//    zonaAreaTexto.innerHTML += "Tamaño: " + archivo.size + " " + "bytes" + " ";
 
 // Leemos el contenido del archivo
     lector = new FileReader();
     lector.onload = exitoCargaContenidoArchivo;
     lector.readAsText(archivo);
-
 }
-
-
 
 
 
@@ -840,6 +864,8 @@ function comenzar() {
     botonGuardarArchivo.addEventListener("click", guardarArchivo, false);
 
     botonEditarArchivo.addEventListener("click", funcionDesahabilitada, false);
+
+    botonPropiedadesArchivo.addEventListener("click", mostrarPropiedades, false);
 
     //TODO: Listar archivos actuales al inicio
 
